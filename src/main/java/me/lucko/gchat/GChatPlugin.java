@@ -44,7 +44,6 @@ import me.lucko.gchat.api.GChatApi;
 import me.lucko.gchat.api.Placeholder;
 import me.lucko.gchat.config.GChatConfig;
 import me.lucko.gchat.hooks.LuckPermsHook;
-import me.lucko.gchat.hooks.NeutronN3FSHook;
 import me.lucko.gchat.placeholder.StandardPlaceholders;
 import net.kyori.adventure.serializer.configurate3.ConfigurateComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -111,10 +110,6 @@ public class GChatPlugin implements GChatApi {
         // hook with luckperms
         if (proxy.getPluginManager().getPlugin("luckperms").isPresent()) {
             placeholders.add(new LuckPermsHook());
-        }
-
-        if (proxy.getPluginManager().getPlugin("neutron-n3fs").isPresent()) {
-            proxy.getEventManager().register(this, new NeutronN3FSHook());
         }
 
         // register chat listener
