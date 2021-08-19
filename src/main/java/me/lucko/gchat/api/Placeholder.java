@@ -41,4 +41,5 @@ public interface Placeholder {
      */
     String getReplacement(Player player, String definition);
 
+    String formatTime(int seconds);
 }

@@ -54,4 +54,9 @@ public class StandardPlaceholders implements Placeholder {
                 return null;
         }
     }
+
+    @Override
+    public String formatTime(int seconds) {
+        return null;
+    }
 }
