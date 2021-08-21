@@ -182,18 +182,19 @@ public class GChatPlugin implements GChatApi {
     }
 
     @Subscribe
-    public boolean onReload(ProxyReloadEvent event) {
-        return reloadConfig();
+   public void onReload(ProxyReloadEvent event) {
+        reloadConfig();
     }
 
+
     public boolean reloadConfig() {
-        try {
+      try {
             config = loadConfig();
-            return true;
+           return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+           e.printStackTrace();
+           return false;
+       }
     }
 
     private GChatConfig loadConfig() throws Exception {
