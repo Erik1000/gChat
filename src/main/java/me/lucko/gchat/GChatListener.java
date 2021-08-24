@@ -151,7 +151,7 @@ public class GChatListener {
         plugin.getProxy().getEventManager().fireAndForget(formedEvent);
 
         if (plugin.getConfig().isLogChatGlobal()) {
-            plugin.getLogger().info(PlainComponentSerializer.plain().serialize(message));
+            plugin.getLogger().info(PlainComponentSerializer.plain().serialize(message)); // TODO - This is deprecated
         }
 
         // send the message to online players

@@ -33,12 +33,11 @@ import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 
 public class LuckPermsHook implements Placeholder, PlaceholderPlatform {
-    private final LuckPerms luckPerms;
     private final LPPlaceholderProvider provider;
 
     public LuckPermsHook() {
-        this.luckPerms = LuckPermsProvider.get();
-        this.provider = new LPPlaceholderProvider(this, this.luckPerms);
+        LuckPerms luckPerms = LuckPermsProvider.get();
+        this.provider = new LPPlaceholderProvider(this, luckPerms);
     }
 
     @Override

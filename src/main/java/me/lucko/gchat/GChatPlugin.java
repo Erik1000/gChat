@@ -80,7 +80,7 @@ public class GChatPlugin implements GChatApi {
             .character('&')
             .extractUrls()
             .build();
-    private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\{([^\\{\\}]+)\\}");
+    private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\{([^{}]+)}");
     private final Set<Placeholder> placeholders = ConcurrentHashMap.newKeySet();
     @Inject
     private ProxyServer proxy;
@@ -182,7 +182,7 @@ public class GChatPlugin implements GChatApi {
     }
 
     @Subscribe
-   public void onReload(ProxyReloadEvent event) {
+   public void onReload(ProxyReloadEvent event) { // The Velocity api requies this to be Void.
         reloadConfig();
     }
 
@@ -206,18 +206,19 @@ public class GChatPlugin implements GChatApi {
 
         ConfigurationNode config = YAMLConfigurationLoader.builder()
                 .setDefaultOptions(options)
-                .setFile(getBundledFile("config.yml"))
+                .setFile(getBundledFile())
                 .build()
                 .load();
         return new GChatConfig(config);
     }
 
-    private File getBundledFile(String name) {
-        File file = new File(dataDirectory.toFile(), name);
+    private File getBundledFile() {
+        File file = new File(dataDirectory.toFile(), "config.yml");
 
         if (!file.exists()) {
             dataDirectory.toFile().mkdir();
-            try (InputStream in = GChatPlugin.class.getResourceAsStream("/" + name)) {
+            try (InputStream in = GChatPlugin.class.getResourceAsStream("/" + "config.yml")) {
+                assert in != null;
                 Files.copy(in, file.toPath());
             } catch (IOException e) {
                 e.printStackTrace();
